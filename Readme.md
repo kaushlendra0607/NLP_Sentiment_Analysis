@@ -25,8 +25,8 @@ This project is built 100% on Free Tier infrastructure to ensure a $0.00 operati
 ---
 
 ### 4. Important Links
-* **Live Demo Link:** [Link will be provided after deployment]
-* **GitHub Repository:** [Link to your public repository]
+* **Live Demo Link:** https://nlp-sentiment-analysis.netlify.app/
+* **GitHub Repository:** https://github.com/kaushlendra0607/NLP_Sentiment_Analysis
 
 ---
 
@@ -45,5 +45,5 @@ This project is built 100% on Free Tier infrastructure to ensure a $0.00 operati
 2. Install dependencies: `npm install`
 3. Create a `.env` file:
    ```env
-   VITE_API_URL=[http://127.0.0.1:8000](http://127.0.0.1:8000)
-   VITE_API_KEY=your_secret_key
+   VITE_API_URL=https://nlp-sentiment-analysis.netlify.app/
+   VITE_API_KEY=nlp_api_key_2580
