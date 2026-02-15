@@ -1,20 +1,18 @@
-import logging
+# backend/app/core/logger.py
+import sys
+from datetime import datetime
 from typing import Optional
 
-# ✅ Get the existing Uvicorn logger instead of making a new one
-logger = logging.getLogger("uvicorn.error")
-logger.setLevel(logging.INFO)
-
 def log_safe(message: str, sensitive_data: Optional[str] = None):
-    """
-    Logs a message. If sensitive_data is provided, it masks it.
-    """
+    timestamp = datetime.now().strftime("%H:%M:%S")
+    
     if sensitive_data:
-        masked = f"{sensitive_data[:3]}...***" if len(sensitive_data) > 4 else "***"
-        logger.info(f"{message}: {masked}")
+        # Mask the secret (Show first 3 chars, hide the rest)
+        masked = f"{sensitive_data[:2]}...***" if len(sensitive_data) > 4 else "***"
+        print(f"[{timestamp}] INFO: {message}: {masked}", flush=True)
     else:
-        logger.info(message)
+        print(f"[{timestamp}] INFO: {message}", flush=True)
 
 def log_error(message: str, error: Exception):
-    """Logs errors without revealing system paths if possible."""
-    logger.error(f"❌ {message}: {str(error)}")
+    timestamp = datetime.now().strftime("%H:%M:%S")
+    print(f"[{timestamp}] ❌ ERROR: {message}: {str(error)}", flush=True)

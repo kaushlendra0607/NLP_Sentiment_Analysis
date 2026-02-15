@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from app.schemas.schemas import FeedbackInput, FeedbackResponse
 from app.services.llm import analyze_feedback_with_ai
 from app.core.security import verify_api_key
-from app.core.logger import logger
+from app.core.logger import log_safe, log_error
 
 app = FastAPI(
     title="Vibe Check API",
@@ -19,7 +19,8 @@ async def analyze_feedback(
     input_data: FeedbackInput, 
     api_key: str = Depends(verify_api_key)
 ):
-    logger.info("📩 Received new feedback for analysis.")
+    # FIX: Using log_safe instead of logger.info
+    log_safe("📩 Received new feedback for analysis")
     
     try:
         result = await analyze_feedback_with_ai(input_data.feedback_text)
@@ -29,11 +30,11 @@ async def analyze_feedback(
             confidence_score=result.get("confidence", 0.0)
         )
     except Exception as e:
-        logger.critical(f"System Crash during analysis: {str(e)}")
+        # FIX: Using log_error instead of logger.critical
+        log_error("System Crash during analysis", e)
         raise HTTPException(status_code=500, detail="Internal Processing Error")
 
 if __name__ == "__main__":
     import uvicorn
-    # Log that server is starting (without revealing paths)
-    logger.info("Server starting on port 8000...")
+    print("🚀 Server starting on port 8000...", flush=True)
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
