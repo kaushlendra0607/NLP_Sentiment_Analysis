@@ -11,4 +11,13 @@ Return ONLY a JSON object in this format:
   "sentiment": "Negative",
   "confidence": 0.95
 }
+The categories can be following, choose the best one:
+Concerns
+Appreciation
+Suggestions
+Complaints
+Questions
+Positive Feedback
+Negative Feedback
+Neutral
 """
