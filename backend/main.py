@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException
-from app.schemas.schemas import FeedbackInput, FeedbackResponse
+from .app.schemas.schemas import FeedbackInput, FeedbackResponse
 from fastapi.middleware.cors import CORSMiddleware
-from app.services.llm import analyze_feedback_with_ai
-from app.core.security import verify_api_key
-from app.core.logger import log_safe, log_error
+from .app.services.llm import analyze_feedback_with_ai
+from .app.core.security import verify_api_key
+from .app.core.logger import log_safe, log_error
 
 app = FastAPI(
     title="Vibe Check API",

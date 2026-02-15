@@ -1,8 +1,8 @@
 import httpx
 import json
-from app.core.config import settings
-from app.core.logger import log_safe, log_error
-from app.services.prompts import SYSTEM_PROMPT
+from ..core.config import settings
+from ..core.logger import log_safe, log_error
+from .prompts import SYSTEM_PROMPT
 
 async def analyze_feedback_with_ai(text: str) -> dict:
     """
