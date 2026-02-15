@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
 from app.schemas.schemas import FeedbackInput, FeedbackResponse
+from fastapi.middleware.cors import CORSMiddleware
 from app.services.llm import analyze_feedback_with_ai
 from app.core.security import verify_api_key
 from app.core.logger import log_safe, log_error
@@ -8,6 +9,14 @@ app = FastAPI(
     title="Vibe Check API",
     description="Sentiment Analysis for Student Feedback",
     version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Allows all origins (Perfect for Hackathon)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 @app.get("/")
