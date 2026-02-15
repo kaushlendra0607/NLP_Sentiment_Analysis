@@ -2,7 +2,6 @@
 
 ### 1. Project Overview
 **Project Name:** Vibe Check AI  
-**Team ID:** [Enter Your Team ID]  
 **One-Liner:** An AI-powered dashboard for universities to instantly categorize and analyze student feedback vibes for better campus management.
 
 ---
@@ -18,7 +17,8 @@
 
 ### 3. Proof of "Zero-Cost" Cloud Usage
 This project is built 100% on Free Tier infrastructure to ensure a $0.00 operating cost:
-* **Render/Vercel Free Tiers:** Used for hosting the web service and frontend assets without subscription fees.
+* **Vercel Free Tiers:** Used for hosting the web service and backend with serverless function assets without subscription fees.
+* **Netlify Free Tiers:** Used for hosting the web service and frontend assets without subscription fees.
 * **Groq Cloud Free Tier:** Provides high-speed LLM inference (up to 14,000 tokens per minute) at zero cost.
 * **Scalability & Concurrency:** To handle **800+ concurrent users**, the application utilizes **Asynchronous Request Handling (ASGI)** in FastAPI. By using non-blocking I/O (via `httpx`), the backend can process multiple AI analysis requests simultaneously without waiting for individual LLM responses to finish, effectively scaling within free-tier resource limits.
 
