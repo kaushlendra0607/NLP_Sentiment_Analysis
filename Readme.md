@@ -70,13 +70,12 @@ Vibe Check AI:
 ```mermaid
 flowchart LR
 
-    A[👤 User]:::user --> B[⚛ React Frontend]:::frontend
-    B --> C[🚀 FastAPI Backend]:::backend
-    C --> D[🧠 Prompt Layer]:::logic
-    D --> E[🔥 Groq LLM - Llama 3]:::llm
-    E --> C
+    A[👤 User]:::user --> B[🌐 Netlify - React Frontend]:::frontend
+    B --> C[⚡ Vercel - FastAPI Backend]:::backend
+    C --> D[🔥 Groq LLM - Llama 3]:::llm
+    D --> C
     C --> B
-    B --> F[📊 Dashboard UI]:::frontend
+    B --> E[📊 Dashboard UI]:::frontend
 
     classDef user fill:#f9c74f,stroke:#333,color:#000;
     classDef frontend fill:#61dafb,stroke:#333,color:#000;
@@ -130,8 +129,8 @@ flowchart LR
 
 | Service | Usage | Free Tier | Purpose |
 |----------|--------|------------|----------|
-| Vercel | Frontend Hosting | 100GB bandwidth/month | React Deployment |
-| Vercel | Serverless Functions | Generous free execution limits | FastAPI Backend (Serverless) |
+| Netlify | Frontend Hosting | 100GB bandwidth/month | React App Deployment |
+| Vercel | Serverless Functions | Generous free execution limits | FastAPI Backend |
 | Groq Cloud | LLM Inference | 14K tokens/min | Sentiment Analysis |
 | Uvicorn | ASGI Server | Free | Local Development |
 
