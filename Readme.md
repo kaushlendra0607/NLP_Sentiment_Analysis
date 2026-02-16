@@ -140,18 +140,6 @@ The backend uses **ASGI async request handling** with `httpx` for non-blocking L
 
 ---
 
-# 🧩 4. Core Technology Stack
-
-```mermaid
-flowchart LR
-    A[React + Tailwind CSS] --> B[FastAPI]
-    B --> C[Uvicorn ASGI]
-    B --> D[httpx Async Client]
-    D --> E[Groq LLM API]
-```
-
----
-
 ## 🔍 Detailed Stack
 
 | Layer | Technology | Version |
