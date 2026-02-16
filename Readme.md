@@ -7,31 +7,31 @@ AI-Powered Real-Time Sentiment Intelligence for Universities
 <p align="center">
 
 <a href="https://www.python.org/">
-  <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=yellow"/>
 </a>
 
 <a href="https://fastapi.tiangolo.com/">
-  <img src="https://img.shields.io/badge/FastAPI-ASGI-009688?style=for-the-badge&logo=fastapi&logoColor=white"/>
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"/>
 </a>
 
 <a href="https://react.dev/">
-  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black"/>
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black"/>
 </a>
 
 <a href="https://tailwindcss.com/">
-  <img src="https://img.shields.io/badge/TailwindCSS-4-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white"/>
+  <img src="https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white"/>
 </a>
 
 <a href="https://groq.com/">
-  <img src="https://img.shields.io/badge/Groq-Llama--3-orange?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Groq_Llama3-FF6F00?style=for-the-badge"/>
 </a>
 
 <a href="https://render.com/">
-  <img src="https://img.shields.io/badge/Render-Backend-46E3B7?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Render-46E3B7?style=for-the-badge"/>
 </a>
 
 <a href="https://www.netlify.com/">
-  <img src="https://img.shields.io/badge/Netlify-Frontend-00C7B7?style=for-the-badge&logo=netlify&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white"/>
 </a>
 
 </p>
@@ -69,31 +69,20 @@ Vibe Check AI:
 
 ```mermaid
 flowchart LR
-    A[User] --> B[React Frontend]
-    B --> C[FastAPI Backend]
-    C --> D[Prompt Engineering Layer]
-    D --> E[Groq LLM - Llama 3]
+
+    A[👤 User]:::user --> B[⚛ React Frontend]:::frontend
+    B --> C[🚀 FastAPI Backend]:::backend
+    C --> D[🧠 Prompt Layer]:::logic
+    D --> E[🔥 Groq LLM - Llama 3]:::llm
     E --> C
     C --> B
-    B --> F[Dashboard UI]
-```
+    B --> F[📊 Dashboard UI]:::frontend
 
----
-
-## 🔹 Backend Concurrency Architecture
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant Frontend
-    participant Backend
-    participant GroqAPI
-
-    User->>Frontend: Submit Feedback
-    Frontend->>Backend: POST /analyze
-    Backend->>GroqAPI: Async LLM Request
-    GroqAPI-->>Backend: JSON Sentiment Response
-    Backend-->>Frontend: Structured Data
+    classDef user fill:#f9c74f,stroke:#333,color:#000;
+    classDef frontend fill:#61dafb,stroke:#333,color:#000;
+    classDef backend fill:#43aa8b,stroke:#333,color:#fff;
+    classDef logic fill:#577590,stroke:#333,color:#fff;
+    classDef llm fill:#f3722c,stroke:#333,color:#fff;
 ```
 
 ---
@@ -102,11 +91,37 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    A[Raw Feedback] --> B[FastAPI Endpoint]
-    B --> C[Prompt Formatting]
-    C --> D[Groq LLM]
-    D --> E[Structured JSON Output]
-    E --> F[Frontend Dashboard]
+
+    A[📝 Raw Feedback]:::input --> B[🚀 FastAPI Endpoint]:::backend
+    B --> C[🧠 Prompt Formatting]:::logic
+    C --> D[🔥 Groq LLM]:::llm
+    D --> E[📦 JSON Output]:::output
+    E --> F[📊 Dashboard]:::frontend
+
+    classDef input fill:#f9c74f,stroke:#333,color:#000;
+    classDef backend fill:#43aa8b,stroke:#333,color:#fff;
+    classDef logic fill:#577590,stroke:#333,color:#fff;
+    classDef llm fill:#f3722c,stroke:#333,color:#fff;
+    classDef output fill:#90be6d,stroke:#333,color:#000;
+    classDef frontend fill:#61dafb,stroke:#333,color:#000;
+```
+
+---
+
+## 🔹 Core Technology Stack
+
+```mermaid
+flowchart LR
+
+    A[⚛ React + Tailwind]:::frontend --> B[🚀 FastAPI]:::backend
+    B --> C[⚡ Uvicorn ASGI]:::backend
+    B --> D[🔗 httpx Async Client]:::logic
+    D --> E[🔥 Groq LLM API]:::llm
+
+    classDef frontend fill:#61dafb,stroke:#333,color:#000;
+    classDef backend fill:#43aa8b,stroke:#333,color:#fff;
+    classDef logic fill:#577590,stroke:#333,color:#fff;
+    classDef llm fill:#f3722c,stroke:#333,color:#fff;
 ```
 
 ---
