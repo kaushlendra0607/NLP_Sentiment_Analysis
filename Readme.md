@@ -4,6 +4,38 @@
 AI-Powered Real-Time Sentiment Intelligence for Universities
 </p>
 
+<p align="center">
+
+<a href="https://www.python.org/">
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
+</a>
+
+<a href="https://fastapi.tiangolo.com/">
+  <img src="https://img.shields.io/badge/FastAPI-ASGI-009688?style=for-the-badge&logo=fastapi&logoColor=white"/>
+</a>
+
+<a href="https://react.dev/">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black"/>
+</a>
+
+<a href="https://tailwindcss.com/">
+  <img src="https://img.shields.io/badge/TailwindCSS-4-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white"/>
+</a>
+
+<a href="https://groq.com/">
+  <img src="https://img.shields.io/badge/Groq-Llama--3-orange?style=for-the-badge"/>
+</a>
+
+<a href="https://render.com/">
+  <img src="https://img.shields.io/badge/Render-Backend-46E3B7?style=for-the-badge"/>
+</a>
+
+<a href="https://www.netlify.com/">
+  <img src="https://img.shields.io/badge/Netlify-Frontend-00C7B7?style=for-the-badge&logo=netlify&logoColor=white"/>
+</a>
+
+</p>
+
 ---
 
 # 🧠 1. Project Overview
@@ -122,11 +154,17 @@ flowchart LR
 
 # 🔗 5. Important Links
 
-Live Demo:  
-https://nlp-sentiment-analysis.netlify.app/
+<p align="center">
 
-GitHub Repository:  
-https://github.com/kaushlendra0607/NLP_Sentiment_Analysis
+<a href="https://nlp-sentiment-analysis.netlify.app/">
+  <img src="https://img.shields.io/badge/Live-Demo-00C7B7?style=for-the-badge&logo=netlify&logoColor=white"/>
+</a>
+
+<a href="https://github.com/kaushlendra0607/NLP_Sentiment_Analysis">
+  <img src="https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white"/>
+</a>
+
+</p>
 
 ---
 
