@@ -72,16 +72,15 @@ flowchart LR
 
     A[👤 User]:::user --> B[🌐 Netlify - React Frontend]:::frontend
     B --> C[⚡ Vercel - FastAPI Backend]:::backend
-    C --> D[🔥 Groq LLM - Llama 3]:::llm
+    C --> D[⚡ Groq LLM - Llama 3]:::llm
     D --> C
     C --> B
     B --> E[📊 Dashboard UI]:::frontend
 
-    classDef user fill:#f9c74f,stroke:#333,color:#000;
-    classDef frontend fill:#61dafb,stroke:#333,color:#000;
-    classDef backend fill:#43aa8b,stroke:#333,color:#fff;
-    classDef logic fill:#577590,stroke:#333,color:#fff;
-    classDef llm fill:#f3722c,stroke:#333,color:#fff;
+    classDef user fill:#7f6000,stroke:#3e2f00,color:#ffffff;
+    classDef frontend fill:#0d1b2a,stroke:#1b263b,color:#ffffff;
+    classDef backend fill:#1b4332,stroke:#081c15,color:#ffffff;
+    classDef llm fill:#7f0000,stroke:#3b0000,color:#ffffff;
 ```
 
 ---
@@ -91,18 +90,18 @@ flowchart LR
 ```mermaid
 flowchart TD
 
-    A[📝 Raw Feedback]:::input --> B[🚀 FastAPI Endpoint]:::backend
+    A[📝 Raw Feedback]:::user --> B[🚀 FastAPI Endpoint]:::backend
     B --> C[🧠 Prompt Formatting]:::logic
-    C --> D[🔥 Groq LLM]:::llm
+    C --> D[⚡ Groq LLM]:::llm
     D --> E[📦 JSON Output]:::output
     E --> F[📊 Dashboard]:::frontend
 
-    classDef input fill:#f9c74f,stroke:#333,color:#000;
-    classDef backend fill:#43aa8b,stroke:#333,color:#fff;
-    classDef logic fill:#577590,stroke:#333,color:#fff;
-    classDef llm fill:#f3722c,stroke:#333,color:#fff;
-    classDef output fill:#90be6d,stroke:#333,color:#000;
-    classDef frontend fill:#61dafb,stroke:#333,color:#000;
+    classDef user fill:#7f6000,stroke:#3e2f00,color:#ffffff;
+    classDef backend fill:#1b4332,stroke:#081c15,color:#ffffff;
+    classDef logic fill:#14213d,stroke:#000000,color:#ffffff;
+    classDef llm fill:#7f0000,stroke:#3b0000,color:#ffffff;
+    classDef output fill:#005f5f,stroke:#003333,color:#ffffff;
+    classDef frontend fill:#0d1b2a,stroke:#1b263b,color:#ffffff;
 ```
 
 ---
@@ -113,14 +112,15 @@ flowchart TD
 flowchart LR
 
     A[⚛ React + Tailwind]:::frontend --> B[🚀 FastAPI]:::backend
-    B --> C[⚡ Uvicorn ASGI]:::backend
+    B --> C[⚙ Uvicorn ASGI]:::infra
     B --> D[🔗 httpx Async Client]:::logic
-    D --> E[🔥 Groq LLM API]:::llm
+    D --> E[⚡ Groq LLM API]:::llm
 
-    classDef frontend fill:#61dafb,stroke:#333,color:#000;
-    classDef backend fill:#43aa8b,stroke:#333,color:#fff;
-    classDef logic fill:#577590,stroke:#333,color:#fff;
-    classDef llm fill:#f3722c,stroke:#333,color:#fff;
+    classDef frontend fill:#0d1b2a,stroke:#1b263b,color:#ffffff;
+    classDef backend fill:#1b4332,stroke:#081c15,color:#ffffff;
+    classDef infra fill:#3a0ca3,stroke:#240046,color:#ffffff;
+    classDef logic fill:#14213d,stroke:#000000,color:#ffffff;
+    classDef llm fill:#7f0000,stroke:#3b0000,color:#ffffff;
 ```
 
 ---
