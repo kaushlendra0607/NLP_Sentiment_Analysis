@@ -130,10 +130,10 @@ flowchart LR
 
 | Service | Usage | Free Tier | Purpose |
 |----------|--------|------------|----------|
-| Netlify | Frontend Hosting | 100GB/month | React Deployment |
-| Render | Backend Hosting | 750 hours/month | FastAPI API |
+| Vercel | Frontend Hosting | 100GB bandwidth/month | React Deployment |
+| Vercel | Serverless Functions | Generous free execution limits | FastAPI Backend (Serverless) |
 | Groq Cloud | LLM Inference | 14K tokens/min | Sentiment Analysis |
-| Uvicorn | ASGI Server | Free | Concurrency |
+| Uvicorn | ASGI Server | Free | Local Development |
 
 ### 💰 Total Operating Cost: $0.00
 
