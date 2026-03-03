@@ -59,3 +59,13 @@ export const MODEL_OPTIONS = {
         { value: 'mistral-small-latest', label: 'Mistral Small' },
     ],
 };
+
+/**
+ * Cloud provider options for the backend-routing dropdown.
+ */
+export const CLOUD_OPTIONS = [
+    { value: 'aws', label: 'AWS Lambda' },
+    { value: 'azure', label: 'Microsoft Azure' },
+    { value: 'render', label: 'Render' },
+    { value: 'vercel', label: 'Vercel' },
+];

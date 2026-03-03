@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { MODEL_OPTIONS } from '../../utils/formatters';
-import { Sparkles, ChevronDown } from 'lucide-react';
+import { MODEL_OPTIONS, CLOUD_OPTIONS } from '../../utils/formatters';
+import { Sparkles, ChevronDown, Cloud } from 'lucide-react';
 
 const providerMeta = {
     gemini: { label: 'Google Gemini', color: 'from-blue-500 to-cyan-400', ring: 'focus:ring-blue-500/40' },
@@ -10,6 +10,7 @@ const providerMeta = {
 
 export default function AnalyzeForm({ onSubmit, isLoading }) {
     const [text, setText] = useState('');
+    const [cloudKey, setCloudKey] = useState('aws');
     const [models, setModels] = useState({
         gemini: MODEL_OPTIONS.gemini[0].value,
         groq: MODEL_OPTIONS.groq[0].value,
@@ -19,7 +20,7 @@ export default function AnalyzeForm({ onSubmit, isLoading }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!text.trim()) return;
-        onSubmit(text, models);
+        onSubmit(text, models, cloudKey);
     };
 
     return (
@@ -41,6 +42,32 @@ export default function AnalyzeForm({ onSubmit, isLoading }) {
                 <span className="absolute bottom-3 right-4 text-xs text-slate-500">
                     {text.length} chars
                 </span>
+            </div>
+
+            {/* Cloud Provider Selector */}
+            <div className="space-y-1.5">
+                <label className="flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-slate-400">
+                    <Cloud className="w-3.5 h-3.5" />
+                    Cloud Backend
+                </label>
+                <div className="relative">
+                    <select
+                        id="cloud-provider-select"
+                        value={cloudKey}
+                        onChange={(e) => setCloudKey(e.target.value)}
+                        className="w-full appearance-none rounded-lg border border-white/10 bg-white/5
+                         px-4 py-2.5 pr-10 text-sm text-white outline-none cursor-pointer
+                         transition-all duration-200 focus:ring-2 focus:ring-violet-500/40
+                         hover:border-white/20"
+                    >
+                        {CLOUD_OPTIONS.map((opt) => (
+                            <option key={opt.value} value={opt.value} className="bg-slate-800 text-white">
+                                {opt.label}
+                            </option>
+                        ))}
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                </div>
             </div>
 
             {/* Model Dropdowns */}

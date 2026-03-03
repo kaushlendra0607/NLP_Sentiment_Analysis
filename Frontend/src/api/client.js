@@ -1,39 +1,58 @@
 import axios from 'axios';
 
-// Vite uses import.meta.env to access environment variables
-const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
-const API_KEY = import.meta.env.VITE_API_KEY || ''; 
+// ── Cloud URL map ──────────────────────────────────────────────────
+// Each key matches the value stored in the Cloud Provider dropdown.
+export const CLOUD_URLS = {
+  aws:    import.meta.env.VITE_AWS_URL    || '',
+  azure:  import.meta.env.VITE_AZURE_URL  || '',
+  render: import.meta.env.VITE_RENDER_URL || '',
+  vercel: import.meta.env.VITE_VERCEL_URL || '',
+};
 
-export const apiClient = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    'X-Research-API-Key': API_KEY
-  },
-});
+const API_KEY = import.meta.env.VITE_API_KEY || '';
 
-// A global interceptor to catch those 422 or 500 fatal errors we built in the backend
-apiClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    // Check if the error is our custom FastAPI backend error format
-    if (error.response && error.response.data && error.response.data.http_status_code) {
-      const backendError = error.response.data;
-      
-      console.error(`[FATAL BACKEND ERROR ${backendError.http_status_code}]:`, backendError.error_message);
-      
-      if (backendError.details) {
-        console.error("[Validation Details]:", backendError.details);
-      }
+// ── Instance cache (one axios instance per cloud) ──────────────────
+const clientCache = {};
 
-      // Attach the clean backend error directly to the promise rejection
-      // so the UI can easily display: error.customData.error_message
-      error.isCustomBackendError = true;
-      error.customData = backendError;
-    } else {
-      console.error("[Network/Unknown API Error]:", error.message);
-    }
-    
-    return Promise.reject(error);
+/**
+ * Returns a cached axios instance whose baseURL points at the chosen cloud.
+ * @param {'aws'|'azure'|'render'|'vercel'} cloudKey
+ */
+export const getApiClient = (cloudKey = 'aws') => {
+  if (clientCache[cloudKey]) return clientCache[cloudKey];
+
+  const baseURL = CLOUD_URLS[cloudKey];
+  if (!baseURL) {
+    console.warn(`[API Client] No URL configured for cloud "${cloudKey}". Requests will fail.`);
   }
-);
+
+  const instance = axios.create({
+    baseURL,
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Research-API-Key': API_KEY,
+    },
+  });
+
+  // Shared error interceptor (same logic as before)
+  instance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response && error.response.data && error.response.data.http_status_code) {
+        const backendError = error.response.data;
+        console.error(`[FATAL BACKEND ERROR ${backendError.http_status_code}]:`, backendError.error_message);
+        if (backendError.details) {
+          console.error("[Validation Details]:", backendError.details);
+        }
+        error.isCustomBackendError = true;
+        error.customData = backendError;
+      } else {
+        console.error("[Network/Unknown API Error]:", error.message);
+      }
+      return Promise.reject(error);
+    }
+  );
+
+  clientCache[cloudKey] = instance;
+  return instance;
+};

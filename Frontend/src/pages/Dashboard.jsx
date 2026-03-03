@@ -23,7 +23,7 @@ export default function Dashboard() {
 
             {/* Form */}
             <div className="max-w-3xl mx-auto">
-                <AnalyzeForm onSubmit={analyzeText} isLoading={isLoading} />
+                <AnalyzeForm onSubmit={(text, models, cloudKey) => analyzeText(text, models, cloudKey)} isLoading={isLoading} />
             </div>
 
             {/* Error Display */}

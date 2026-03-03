@@ -10,10 +10,11 @@ export const useAnalyze = () => {
 
     /**
      * Orchestrates the parallel LLM race and saves the summary.
-     * @param {string} text - The text to analyze
-     * @param {object} models - { gemini: "...", groq: "...", mistral: "..." }
+     * @param {string} text     - The text to analyze
+     * @param {object} models   - { gemini: "...", groq: "...", mistral: "..." }
+     * @param {string} cloudKey - 'aws', 'azure', 'render', or 'vercel'
      */
-    const analyzeText = async (text, models) => {
+    const analyzeText = async (text, models, cloudKey = 'aws') => {
         setIsLoading(true);
         setError(null);
         setResults(null);
@@ -28,14 +29,13 @@ export const useAnalyze = () => {
         };
 
         try {
-            console.log("[ORCHESTRATOR] Starting parallel LLM race...");
+            console.log(`[ORCHESTRATOR] Starting parallel LLM race on ${cloudKey.toUpperCase()}...`);
 
             // 1. THE RACE: Fire all three APIs at the exact same millisecond
-            // Because our service catches errors and returns fallbacks, this will NEVER throw an exception mid-race.
             const [geminiRes, groqRes, mistralRes] = await Promise.all([
-                analyzeProvider('gemini', payload),
-                analyzeProvider('groq', payload),
-                analyzeProvider('mistral', payload)
+                analyzeProvider(cloudKey, 'gemini', payload),
+                analyzeProvider(cloudKey, 'groq', payload),
+                analyzeProvider(cloudKey, 'mistral', payload)
             ]);
 
             console.log("[ORCHESTRATOR] Race finished. Bundling results.");
@@ -54,7 +54,7 @@ export const useAnalyze = () => {
 
             // 3. THE AGGREGATOR: Send the bundle to MongoDB and get the metrics back
             console.log("[ORCHESTRATOR] Sending bundle to aggregator...");
-            const summaryMetrics = await saveResearchSummary(summaryPayload);
+            const summaryMetrics = await saveResearchSummary(cloudKey, summaryPayload);
 
             // Set the final research metrics for the UI
             setResults(summaryMetrics);
@@ -62,10 +62,7 @@ export const useAnalyze = () => {
 
         } catch (err) {
             // This catch block only triggers if something catastrophic happens
-            // (e.g., the /summary endpoint itself crashes or the user loses WiFi entirely)
             console.error("[ORCHESTRATOR FATAL ERROR]:", err);
-
-            // Extract our clean backend error message if it exists, otherwise use standard error
             const errorMessage = err.customData?.error_message || err.message || "An unexpected error occurred.";
             setError(errorMessage);
         } finally {

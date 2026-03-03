@@ -1,11 +1,14 @@
-import { apiClient } from './client';
+import { getApiClient } from './client';
 
 /**
  * Fires the LLM endpoint, times the roundtrip, and calculates cloud network overhead.
- * @param {string} provider - 'gemini', 'groq', or 'mistral'
- * @param {object} payload - e.g., { text: "...", model_gemini: "gemini-2.5-flash" }
+ * @param {string} cloudKey  - 'aws', 'azure', 'render', or 'vercel'
+ * @param {string} provider  - 'gemini', 'groq', or 'mistral'
+ * @param {object} payload   - e.g., { text: "...", model_gemini: "gemini-2.5-flash" }
  */
-export const analyzeProvider = async (provider, payload) => {
+export const analyzeProvider = async (cloudKey, provider, payload) => {
+    const apiClient = getApiClient(cloudKey);
+
     // 1. Start the high-resolution timer
     const startTime = performance.now();
 
@@ -45,7 +48,8 @@ export const analyzeProvider = async (provider, payload) => {
 /**
  * Sends the bundled results from all 3 models to be saved in MongoDB.
  */
-export const saveResearchSummary = async (summaryPayload) => {
+export const saveResearchSummary = async (cloudKey, summaryPayload) => {
+    const apiClient = getApiClient(cloudKey);
     const response = await apiClient.post('/api/analyze/summary', summaryPayload);
     return response.data;
 };
@@ -53,7 +57,8 @@ export const saveResearchSummary = async (summaryPayload) => {
 /**
  * Fetches the calculated historical averages for the paper.
  */
-export const getAnalytics = async (limit = 50) => {
+export const getAnalytics = async (cloudKey, limit = 50) => {
+    const apiClient = getApiClient(cloudKey);
     const response = await apiClient.get(`/api/research/analytics?limit=${limit}`);
     return response.data;
 };
@@ -61,7 +66,8 @@ export const getAnalytics = async (limit = 50) => {
 /**
  * Fetches the raw history for the dashboard UI.
  */
-export const getHistory = async () => {
+export const getHistory = async (cloudKey) => {
+    const apiClient = getApiClient(cloudKey);
     const response = await apiClient.get('/api/research/history');
     return response.data;
 };
@@ -69,13 +75,15 @@ export const getHistory = async () => {
 /**
  * Exports paginated raw MongoDB data for Python/Pandas analysis.
  */
-export const exportData = async (skip = 0, limit = 100) => {
+export const exportData = async (cloudKey, skip = 0, limit = 100) => {
+    const apiClient = getApiClient(cloudKey);
     const response = await apiClient.get(`/api/research/export?skip=${skip}&limit=${limit}`);
     return response.data;
 };
 
 
-export const fetchDatabasePerformance = async () => {
+export const fetchDatabasePerformance = async (cloudKey) => {
+    const apiClient = getApiClient(cloudKey);
     try {
         // apiClient automatically handles the base URL and API keys
         const response = await apiClient.get('/api/research/db-performance');
@@ -86,7 +94,7 @@ export const fetchDatabasePerformance = async () => {
     } catch (error) {
         console.error("[API Service] Failed to fetch DB performance:", error);
 
-        // Return a perfectly structured fallback so your UI charts render 
+        // Return a perfectly structured fallback so your UI charts render
         // cleanly as 'empty' rather than throwing a white screen crash.
         return {
             write_metrics: {
@@ -108,7 +116,8 @@ export const fetchDatabasePerformance = async () => {
 };
 
 
-export const fetchRawMetrics = async () => {
+export const fetchRawMetrics = async (cloudKey) => {
+    const apiClient = getApiClient(cloudKey);
     try {
         const response = await apiClient.get('/api/research/raw-metrics');
         return response.data;
