@@ -294,7 +294,7 @@ Copyright © 2024-2025 Kaushlendra Pratap Singh. All rights reserved.
 *AI Engineer | Cloud Infrastructure Specialist | Full Stack Developer*
 
 <p align="left">
-<a href="https://github.com/kaushlendra-pt-singh">
+<a href="https://www.linkedin.com/in/kps2004/">
   <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
 </a>
 <a href="https://www.linkedin.com/in/kaushlendra-pratap-singh">
